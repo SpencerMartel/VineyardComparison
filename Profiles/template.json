@@ -1,0 +1,21 @@
+
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "",
+      "coordinates": [0, 0]
+    },
+    "properties": {
+      "country" : "",
+      "region": "",
+      "red_grapes": ["",""],
+      "white_grapes": ["", ""],
+      "mean_elevation": "",
+      "mean_aspect": "",
+      "mean_temp": "",
+      "GDD": "",
+      "mean_soil_content" : {},
+      "avg_diurnal_range" : 0,
+      "image": ""
+    }
+  }
