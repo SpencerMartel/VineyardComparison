@@ -39,7 +39,7 @@ def main():
     # Sidebar
     with st.sidebar:
         # Load profiles as python dict.
-        p = open('D:\Programming\Projects\VineyardComposition\Profiles\profiles.json')
+        p = open('profiles.json')
         profiles = json.load(p)
 
         st.header('Select the Location you would like to compare to:')
