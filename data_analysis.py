@@ -5,8 +5,9 @@ import ee
 import requests
 import streamlit as st
 
-ee.Authenticate()
-ee.Initialize()
+service_account = st.secrets.ee_email
+credentials = ee.ServiceAccountCredentials(email = service_account, key_data = st.secrets.ee_key)
+ee.Initialize(credentials)
 
 
 def queried_df (sand_profile, clay_profile, orgc_profile):
