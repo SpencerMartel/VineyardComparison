@@ -1,0 +1,8 @@
+earthengine_api==0.1.326
+ee==0.4
+folium==0.12.1.post1
+pandas==1.4.2
+plotly==5.10.0
+requests==2.28.1
+streamlit==1.13.0
+streamlit_folium==0.6.15
