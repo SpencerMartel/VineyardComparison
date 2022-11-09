@@ -5,6 +5,7 @@ import ee
 import requests
 import streamlit as st
 
+ee.Authenticate()
 ee.Initialize()
 
 
