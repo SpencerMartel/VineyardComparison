@@ -1,6 +1,10 @@
 import ee
+import streamlit as st
 
-ee.Initialize()
+service_account = st.secrets["ee_email"]
+credentials = ee.ServiceAccountCredentials(email = service_account, key_data = st.secrets["ee_key"])
+ee.Initialize(credentials)
+
 
 # Soil depths [in cm] where we have data.
 olm_depths = [0, 10, 30, 60, 100, 200]
