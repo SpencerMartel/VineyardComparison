@@ -11,7 +11,6 @@ ee.Initialize(credentials)
 
 
 def queried_df (sand_profile, clay_profile, orgc_profile):
-    # Initialize dataframe
     data = [sand_profile,clay_profile, orgc_profile]
     df = pandas.DataFrame(data=data)
     df.index = ['Sand', 'Clay', 'Organic Matter']
