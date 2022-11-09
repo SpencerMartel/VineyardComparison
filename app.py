@@ -57,7 +57,7 @@ def main():
                 usa_options.append(obj['properties']['region'])
 
 
-        country = st.radio(label = 'Country', label_visibility='collapsed',options=('France', 'Italy', 'USA',), horizontal=True)
+        country = st.selectbox(label = 'Country', label_visibility='collapsed',options=('France', 'Italy', 'USA',))
         if country == 'France':
             region = st.radio(label='Region', options=france_options)
             
@@ -143,7 +143,7 @@ def main():
 
 def map_creater():
     
-    my_map = folium.Map(location=(54.57206165565852,255.58593750000003), zoom_start=4,)
+    my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]])
     # TileLayer(
     #           tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     #           attr='Esri',

@@ -37,9 +37,8 @@ def piechart(dataframe):
 
 def get_elevation(lat,long):
     # This correction is required because of a streamlit problem where you can scroll left or right infinitely and the long values continue forever.
-    correct_long = long - 360
 
-    url = f'http://geogratis.gc.ca/services/elevation/cdem/altitude?lat={lat}&lon={correct_long}'
+    url = f'http://geogratis.gc.ca/services/elevation/cdem/altitude?lat={lat}&lon={long}'
     result = requests.get(url)
     dict = json.loads(result.text)
     return dict

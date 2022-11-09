@@ -19,7 +19,6 @@ def main():
         print('\n', new_region)
         profile_json["profiles"].append(new_region)
     
-    print(f'Profile json is :\n {profile_json}')
 
     with open('Profiles\profiles.json', 'w') as t:
         t.write(json.dumps(profile_json, indent = 4, sort_keys = True))
