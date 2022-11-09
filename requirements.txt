@@ -1,5 +1,5 @@
 earthengine_api==0.1.326
-ee==0.4
+ee==0.2
 folium==0.12.1.post1
 pandas==1.4.2
 plotly==5.10.0
