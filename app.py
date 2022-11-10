@@ -140,13 +140,7 @@ def main():
 def map_creater():
     
     my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]])
-    # TileLayer(
-    #           tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    #           attr='Esri',
-    #           overlay=False,
-    #           control = False
-    #           ).add_to(my_map)
-
+    folium.TileLayer('cartodbdark_matter', overlay=False).add_to(my_map)
 
     my_map.add_child(folium.LayerControl())
     return my_map
