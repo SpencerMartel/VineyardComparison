@@ -8,7 +8,6 @@ from cloud import *
 
 
 title = 'Vineyard Site Selection'
-subtitle = 'Source:'
 
 def main():
     # Config for website
@@ -35,7 +34,6 @@ def main():
         )
     
 
-    region = None
     # Sidebar
     with st.sidebar:
         # Load profiles as python dict.
@@ -93,7 +91,6 @@ def main():
 
 
     st.title('Vineyard Site Selection')
-    st.caption('Source:')
 
     # Load data
     sand = get_data("sand")
