@@ -98,7 +98,7 @@ def main():
     orgc = get_data("orgc")
 
     # Display map
-    map_data = stf.st_folium(map_creater(), width = 1000)
+    map_data = stf.st_folium(map_creater(), width = 800)
     
     queried_col, comparison_col = st.columns(2, gap='small')
     # Data for graphs / tables
@@ -139,10 +139,7 @@ def main():
 
 def map_creater():
     
-    my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]])
-    folium.TileLayer('cartodbdark_matter', overlay=False).add_to(my_map)
-
-    my_map.add_child(folium.LayerControl())
+    my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]], tiles="Stamen Terrain")
     return my_map
 
 
