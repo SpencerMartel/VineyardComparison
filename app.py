@@ -98,7 +98,7 @@ def main():
     orgc = get_data("orgc")
 
     # Display map
-    map_data = stf.st_folium(map_creater(), width = 900, height = 700)
+    map_data = stf.st_folium(map_creater(), width = 1000, height = 500)
     
     queried_col, comparison_col = st.columns(2, gap='small')
     # Data for graphs / tables
