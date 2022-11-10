@@ -94,7 +94,6 @@ def main():
 
     st.title('Vineyard Site Selection')
     st.caption('Source:')
-    st.write(f'Queried Region: {region}')
 
     # Load data
     sand = get_data("sand")
