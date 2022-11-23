@@ -7,7 +7,6 @@ from cloud import *
 import matplotlib.pyplot as plt
 
 title = 'Vineyard Site Selection'
-subtitle = 'Source:'
 
 def main():
     # Config for website
