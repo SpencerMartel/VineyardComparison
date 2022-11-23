@@ -1,11 +1,10 @@
 import folium
-from folium import TileLayer
+import numpy as np
 import streamlit as st
 import streamlit_folium as stf
 from data_analysis import *
 from cloud import *
-
-
+import matplotlib.pyplot as plt
 
 title = 'Vineyard Site Selection'
 subtitle = 'Source:'
@@ -17,15 +16,15 @@ def main():
         page_icon=":wine_glass:",
         layout = "wide",
         initial_sidebar_state="expanded")
+
     st.markdown(
-            """
+        """
         <style>
-        .streamlit-expanderHeader {
-            font-weight: bold;
-            font-size:18px;
-        }
         .css-1xtoq5p e1fqkh3o2 {
             display: none;
+        }
+        div[class="css-1pd56a0 e1tzin5v0"] {
+            background-image: linear-gradient(to bottom, red 10%, #900c3f,0%);
         }
         MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
@@ -35,7 +34,6 @@ def main():
         )
     
 
-    region = None
     # Sidebar
     with st.sidebar:
         # Load profiles as python dict.
@@ -88,13 +86,11 @@ def main():
             for obj in profiles['profiles']:
                 if obj['properties']['region'] == region:
                     queried_region_profile.update(obj)
-            
             make_profile_card(queried_region_profile)
 
 
     st.title('Vineyard Site Selection')
-    st.caption('Source:')
-    st.write(f'Queried Region: {region}')
+
 
     # Load data
     sand = get_data("sand")
@@ -102,17 +98,19 @@ def main():
     orgc = get_data("orgc")
 
     # Display map
-    map_data = stf.st_folium(map_creater(), width = 1000)
+    map_data = stf.st_folium(map_creater(), width = 1500)
     
-    queried_col, comparison_col = st.columns(2, gap='small')
+    queried_col,profile_col = st.columns(2)
     # Data for graphs / tables
     clicked_lat_lng = (map_data["last_clicked"])
+
+
     if not clicked_lat_lng:
         st.header('Click anywhere in Canada to load data for that point!')
     else:
         clicked_lat, clicked_lng = round(map_data["last_clicked"]['lat'], 2), round(map_data["last_clicked"]['lng'], 2)
         # Used to debug data passed back from folium
-        st.write(map_data['last_clicked'])
+        # st.write(map_data['last_clicked'])
 
         
         # Data analysis
@@ -123,36 +121,32 @@ def main():
         if queried_clay_profile is None:
             st.write('No data available')
         else:
+            # This is where we begin the comparison.
             with queried_col:
-                
-                st.title('Soil Content')
+                st.title('Selected Location')
                 df = queried_df(queried_sand_profile, queried_clay_profile, queried_orgc_profile)
-                # Only Transpose the data so it looks nicer, but keep original for future analysis
-                # c1.write(df.T)
+                location_soil_mean_df = calculate_soil_mean(df.T)
 
-                # Display metrics
-                st.subheader('Soil Content')
-                st.write(piechart(df.T))
-                percent = df.iloc[:, 1:] = df.iloc[:, 1:].mul(100).round(3).astype(str).add(' %')
-                st.subheader('Soil Composition')
-                st.write(percent.T)
+                profile_soil_mean_df = pandas.DataFrame({
+                    "Clay": 0.279,
+                    "Organic Matter": 0.0117,
+                    "Other": 0.040,
+                    "Sand": 0.3067
+                }, index = ["Profile Mean"])
+
+                fig = comparative_soil_chart(location_soil_mean_df, profile_soil_mean_df)
+                st.write(fig)
+                
                 elevation = get_elevation(clicked_lat, clicked_lng)
                 result = elevation['altitude']
-                st.metric(label = 'Elevation', value = result)
-                
+                st.write(f'Elevation: {result}')
+            with profile_col:
+                return
+
 
 def map_creater():
     
-    my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]])
-    # TileLayer(
-    #           tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    #           attr='Esri',
-    #           overlay=False,
-    #           control = False
-    #           ).add_to(my_map)
-
-
-    my_map.add_child(folium.LayerControl())
+    my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]], tiles= "Stamen Terrain")
     return my_map
 
 

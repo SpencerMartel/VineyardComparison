@@ -2,6 +2,7 @@
 __pycache__
 .vscode
 tempCodeRunnerFile.py
+.streamlit/secrets.toml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

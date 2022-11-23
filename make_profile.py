@@ -7,7 +7,7 @@ ee.Initialize()
 # Main file for creating the profiles, can do everything programatically once the coordinates are in the profile.
 def main():
 
-    with open('Profiles\profiles.json', 'r') as f:
+    with open('profiles.json', 'r') as f:
         dict_profiles = json.load(f)
 
     profile_json = {"profiles" : []}
@@ -20,12 +20,9 @@ def main():
         profile_json["profiles"].append(new_region)
     
 
-    with open('Profiles\profiles.json', 'w') as t:
+    with open('profiles.json', 'w') as t:
         t.write(json.dumps(profile_json, indent = 4, sort_keys = True))
     
-
-    
-
 
 def get_mean_elevation(bounding_geometry):
     """
@@ -43,7 +40,7 @@ def get_mean_elevation(bounding_geometry):
         scale=30,
         maxPixels=1e9
     )
-
+    
     mean_elevation = (str(round(mean_dict.get('elevation').getInfo(),2)) + ' m')
 
     return mean_elevation
@@ -69,9 +66,13 @@ def profile_mean_soil_content(queried_polygon):
         geometry=ee_geometry,
     )
 
-    profile = { "sand": create_soil_data(sand_dict),
-                "clay" : create_soil_data(clay_dict),
-                "organic material" : create_soil_data(orgc_dict)}
+    sand = create_soil_data(sand_dict)
+    clay = create_soil_data(clay_dict)
+    orgc = create_soil_data(orgc_dict)
+    profile = { "Sand": sand,
+                "Clay" : clay,
+                "Organic Matter" : orgc,
+                "Other": round(100 - (sand + clay + orgc))}
     return profile
 
 def create_soil_data(soil_dict):
@@ -80,12 +81,11 @@ def create_soil_data(soil_dict):
     # Names of bands associated with reference depths.
     olm_bands = ["b" + str(sd) for sd in olm_depths]
 
-
     sum = 0
     for band in olm_bands:
         sum = sum + soil_dict.get(band).getInfo()
     
-    return (round((sum / len(olm_bands)) * 100, 2))
+    return round(sum / len(olm_bands)*100,3)
 
 def get_diurnal_range(bounding_geometry):
     ee_geometry = ee.Geometry.Polygon(bounding_geometry)
@@ -99,7 +99,6 @@ def get_diurnal_range(bounding_geometry):
         maxPixels=1e9
     )
     mean_diurnal_range = mean_dict.getInfo()
-    print(len(mean_diurnal_range))
 
     mean = round(sum(mean_diurnal_range.values()) / len(mean_diurnal_range), 2)
     return mean

@@ -59,14 +59,13 @@ def get_data(param):
 
 def local_profile(dataset, poi, buffer):
     poi=ee.Geometry.Point(poi[0],poi[1])
-    # Get properties at the location of interest and transfer to client-side.
     prop = dataset.sample(poi, buffer).select(olm_bands).getInfo()
 
     if prop['features'] != []:
         # Selection of the features/properties of interest.
         profile = prop["features"][0]["properties"]
         # Re-shaping of the dict.
-        profile = {key: (round(val,3)) for key, val in profile.items()}
+        profile = {key: (round(val,5)) for key, val in profile.items()}
         return profile
     else:
         return 'No data :('

@@ -150,9 +150,10 @@
                 "mean_aspect": "",
                 "mean_elevation": "281.44 m",
                 "mean_soil_content_%": {
-                    "clay": 27.9,
-                    "organic material": 1.17,
-                    "sand": 30.67
+                    "Clay": 27.9,
+                    "Organic Matter": 1.17,
+                    "Other": 40,
+                    "Sand": 30.67
                 },
                 "mean_temp": "",
                 "red_grapes": [
@@ -318,9 +319,10 @@
                 "mean_aspect": "",
                 "mean_elevation": "260.78 m",
                 "mean_soil_content_%": {
-                    "clay": 30.2,
-                    "organic material": 1.52,
-                    "sand": 32.7
+                    "Clay": 30.2,
+                    "Organic Matter": 1.52,
+                    "Other": 36,
+                    "Sand": 32.7
                 },
                 "mean_temp": "",
                 "red_grapes": [
@@ -486,9 +488,10 @@
                 "mean_aspect": "",
                 "mean_elevation": "281.44 m",
                 "mean_soil_content_%": {
-                    "clay": 27.9,
-                    "organic material": 1.17,
-                    "sand": 30.67
+                    "Clay": 27.9,
+                    "Organic Matter": 1.17,
+                    "Other": 40,
+                    "Sand": 30.67
                 },
                 "mean_temp": "",
                 "red_grapes": [
@@ -760,9 +763,10 @@
                 "mean_aspect": "",
                 "mean_elevation": "42.72 m",
                 "mean_soil_content_%": {
-                    "clay": 21.86,
-                    "organic material": 1.0,
-                    "sand": 49.5
+                    "Clay": 21.86,
+                    "Organic Matter": 1.0,
+                    "Other": 28,
+                    "Sand": 49.5
                 },
                 "mean_temp": "",
                 "red_grapes": [
@@ -935,22 +939,81 @@
                 "image": "https://www.savoredjourneys.com/wp-content/uploads/2018/11/wineries-tuscany-first.jpg",
                 "mean_aspect": "",
                 "mean_elevation": "316.54 m",
-                "mean_soil_content": {},
                 "mean_soil_content_%": {
-                    "clay": 33.18,
-                    "organic material": 1.42,
-                    "sand": 29.96
+                    "Clay": 33.18,
+                    "Organic Matter": 1.42,
+                    "Other": 35,
+                    "Sand": 29.96
                 },
                 "mean_temp": "",
                 "red_grapes": [
-                    "",
-                    ""
+                    "Sangiovese",
+                    "Merlot",
+                    "Cabernet Sauvignon"
                 ],
                 "region": "Tuscany",
                 "source": "savoredjourneys.com",
                 "white_grapes": [
-                    "",
-                    ""
+                    "Trebbiano"
+                ]
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    [
+                        7.2475707531,
+                        47.8009481094
+                    ],
+                    [
+                        7.0827758312,
+                        47.861794205
+                    ],
+                    [
+                        7.4755370617,
+                        48.6227116578
+                    ],
+                    [
+                        7.6293456554,
+                        48.6063692385
+                    ],
+                    [
+                        7.3848998547,
+                        47.9556887778
+                    ],
+                    [
+                        7.2475707531,
+                        47.8009481094
+                    ]
+                ],
+                "type": ""
+            },
+            "properties": {
+                "GDD": "",
+                "avg_diurnal_range": 11.06,
+                "country": "France",
+                "image": "https://www.routedesvins.alsace/wp-content/uploads/2020/08/photoreseau.jpg",
+                "mean_aspect": "",
+                "mean_elevation": "307.26 m",
+                "mean_soil_content_%": {
+                    "Clay": 22.18,
+                    "Organic Matter": 1.5,
+                    "Other": 37,
+                    "Sand": 39.68
+                },
+                "mean_temp": "",
+                "red_grapes": [
+                    "Pinot Noir"
+                ],
+                "region": "Alsace",
+                "source": "routedesvins.alsace",
+                "white_grapes": [
+                    "Riesling",
+                    "Pinot Blanc",
+                    "Gew\u00c3\u00bcrztraminer",
+                    "Pinot Gris",
+                    "Sylvaner"
                 ]
             },
             "type": "Feature"

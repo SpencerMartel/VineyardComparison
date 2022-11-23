@@ -1,9 +1,12 @@
 import json
+import ee
+import numpy as np
 import pandas
 import plotly.express as px
-import ee
 import requests
 import streamlit as st
+import matplotlib as mpl
+from matplotlib import pyplot as plt
 
 service_account = st.secrets["ee_email"]
 credentials = ee.ServiceAccountCredentials(email = service_account, key_data = st.secrets["ee_key"])
@@ -36,9 +39,8 @@ def piechart(dataframe):
     fig.update_traces(textposition = 'inside', showlegend = False,textinfo='percent+label')
     return fig
 
-def get_elevation(lat,long):
-    # This correction is required because of a streamlit problem where you can scroll left or right infinitely and the long values continue forever.
 
+def get_elevation(lat,long):
     url = f'http://geogratis.gc.ca/services/elevation/cdem/altitude?lat={lat}&lon={long}'
     result = requests.get(url)
     dict = json.loads(result.text)
@@ -76,3 +78,27 @@ def make_card_chart (region_dict):
     df = df.T
 
     return df
+
+def comparative_soil_chart(location_soil, profile_soil):
+    
+    # Merge clicked location and closest profile dataframes
+    double = location_soil.join(profile_soil.T)
+
+    # Configure the chart
+    labels = double.T.columns
+    x = np.arange(len(labels))  # the label locations
+    width = 0.35  # the width of the bars
+    fig, ax = plt.subplots()
+    rects1 = ax.bar(x-width/2, double["Mean"] * 100 , width, label = "Clicked Location", color='r')
+    rects2 = ax.bar(x+width/2, double["Profile Mean"] * 100, width, label = "Most Similar Profile")
+    # Set Titles, other personalizations
+    ax.set_ylabel('Soil Content % ')
+    ax.set_title('Comparative soil distribution')
+    ax.set_xticks(x, labels)
+    ax.set_facecolor(color='#380024')
+    ax.legend()
+    ax.bar_label(rects1, padding=3)
+    ax.bar_label(rects2, padding=3)
+    mpl.rcParams.update({'text.color' : "white",
+                        'axes.labelcolor' : "white"})
+    return fig
