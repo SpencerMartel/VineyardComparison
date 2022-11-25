@@ -66,8 +66,6 @@ def main():
 
             # This is where I build the sidebar region cards
             make_profile_card(queried_region_profile)
-
-        
         if country == 'Italy':
             region = st.radio(label='Region', options=italy_options)
             # Grab the profile associated with the queried region to build the card.
@@ -77,7 +75,6 @@ def main():
                     queried_region_profile.update(obj)
             
             make_profile_card(queried_region_profile)
-
         if country == 'USA':
             region = st.radio(label='Region', options=usa_options)
             # Grab the profile associated with the queried region to build the card.
@@ -90,17 +87,16 @@ def main():
 
     st.title('Vineyard Site Selection')
 
-
     # Load data
     sand = get_data("sand")
     clay = get_data("clay")
     orgc = get_data("orgc")
-
     # Display map
     map_data = stf.st_folium(map_creater(), width = 1500)
     
     queried_col,profile_col = st.columns(2)
-    # Data for graphs / tables
+
+    # Data from leaflet
     clicked_lat_lng = (map_data["last_clicked"])
 
 
@@ -126,6 +122,7 @@ def main():
                 df = queried_df(queried_sand_profile, queried_clay_profile, queried_orgc_profile)
                 location_soil_mean_df = calculate_soil_mean(df.T)
 
+                st.write(location_soil_mean_df)
                 profile_soil_mean_df = pandas.DataFrame({
                     "Clay": 0.279,
                     "Organic Matter": 0.0117,
@@ -137,8 +134,8 @@ def main():
                 st.write(fig)
                 
                 elevation = get_elevation(clicked_lat, clicked_lng)
-                result = elevation['altitude']
-                st.write(f'Elevation: {result}')
+                elevation_result = elevation['altitude']
+                make_queried_json(location_soil_mean_df, elevation_result, clicked_lat, clicked_lng)
             with profile_col:
                 return
 

@@ -102,3 +102,64 @@ def comparative_soil_chart(location_soil, profile_soil):
     mpl.rcParams.update({'text.color' : "white",
                         'axes.labelcolor' : "white"})
     return fig
+
+
+def comparison(queried_profile, profiles_dict):
+    
+    closest = 10000
+
+    for region in profiles_dict["profiles"]:
+        # Loop through regions, compare values of clicked location to region
+        # Whichever one has the lowest score is the closest region.
+        return
+
+def make_queried_json(soil_df, elevation, lat, long):
+    soil = pandas.DataFrame.to_dict(soil_df)
+
+    location_dict = {
+            "mean_elevation": elevation,
+            "mean_temp": get_location_temp(lat,long),
+            "mean_soil_content_%" : {
+                "Clay": soil["Mean"]["Clay"],
+                "Organic Matter": soil["Mean"]["Organic Matter"],
+                "Other": soil["Mean"]["Other"],
+                "Sand": soil["Mean"]["Sand"]
+            },
+            "avg_diurnal_range" : get_location_diurnal_range(long, lat),
+        }
+    
+    print(location_dict)
+
+def get_location_temp(lat,long):
+    
+    point = ee.Geometry.Point(long,lat)
+    image = ee.Image("WORLDCLIM/V1/BIO")
+    image = image.multiply(0.1)
+    dataset = image.select("bio01")
+    
+    mean_dict = dataset.reduceRegion(
+        reducer=ee.Reducer.mean(),
+        geometry=point,
+        scale=30,
+        maxPixels=1,
+    )
+    info = mean_dict.getInfo()
+    mean = round(sum(info.values()), 2)
+    return mean
+
+
+def get_location_diurnal_range(long, lat):
+    ee_geometry = ee.Geometry.Point(long, lat)
+    image = ee.Image("OpenLandMap/CLM/CLM_LST_MOD11A2-DAYNIGHT_M/v01").select('may', 'jun','jul', 'aug','sep')
+    image = image.multiply(0.02)
+
+    mean_dict = image.reduceRegion(
+        reducer=ee.Reducer.mean(),
+        geometry=ee_geometry,
+        scale=30,
+        maxPixels=1e9
+    )
+    mean_diurnal_range = mean_dict.getInfo()
+
+    mean = round(sum(mean_diurnal_range.values()) / len(mean_diurnal_range),2)
+    return mean

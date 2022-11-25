@@ -16,6 +16,7 @@ def main():
         new_region["properties"]["mean_elevation"] = get_mean_elevation(region["geometry"]["coordinates"])
         new_region["properties"]["mean_soil_content_%"] = profile_mean_soil_content(region["geometry"]["coordinates"])
         new_region["properties"]["avg_diurnal_range"] = get_diurnal_range(region["geometry"]["coordinates"])
+        new_region["properties"]["mean_temp"] = get_mean_temp(region["geometry"]["coordinates"])
         print('\n', new_region)
         profile_json["profiles"].append(new_region)
     
@@ -103,5 +104,20 @@ def get_diurnal_range(bounding_geometry):
     mean = round(sum(mean_diurnal_range.values()) / len(mean_diurnal_range), 2)
     return mean
 
+def get_mean_temp(bounding_geometry):
     
+    ee_geometry = ee.Geometry.Polygon(bounding_geometry)
+    image = ee.Image("WORLDCLIM/V1/BIO")
+    dataset = image.select("bio01")
+    
+    mean_dict = dataset.reduceRegion(
+        reducer=ee.Reducer.mean(),
+        geometry=ee_geometry,
+        scale=30,
+        maxPixels=1e9
+    )
+    value = list(mean_dict.getInfo().values())
+
+    return round((value[0]*0.1), 2)
+
 main()
