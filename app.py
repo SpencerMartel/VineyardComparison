@@ -34,7 +34,8 @@ def main():
         p = open('profiles.json')
         profiles = json.load(p)
         
-        st.header('Select the Location you would like to compare to:')
+        st.header('Profiles currently in our database')
+        st.subheader('Click through them to learn about the region')
 
         # Lets me programatically build the sidebar based on data in profiles.
         france_options = []
