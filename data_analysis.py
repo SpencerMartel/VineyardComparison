@@ -59,12 +59,12 @@ def make_profile_card(region_dict):
     # Write em to screen, no need to return st.container() writes already
     with st.container():
         st.write('#')
-        st.markdown(f'<div style="text-align: center;font-weight: bold;font-size: 20px;">{region}, {country}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="text-align: center;font-weight: bold;font-size: 22px;">{region}, {country}</div>', unsafe_allow_html=True)
         st.write('##')
         st.image(str(region_dict['properties']['image']), caption=f"Source: {region_dict['properties']['source']}")
         st.write(f'**Red grapes:**    {red_grapes}')
         st.write(f'**White grapes:**    {white_grapes}')
-        st.write(f'**Mean elevation:**    {elevation}')
+        st.write(f'**Mean elevation:**    {elevation} m')
         st.write(f'**Mean diurnal Range:**    {diurnal_range}°C')
         st.write(f'**Soil Content:**')
         st.write(make_card_chart(region_dict).style.format("{:.4}%"))
@@ -104,14 +104,35 @@ def comparative_soil_chart(location_soil, profile_soil):
     return fig
 
 
-def comparison(queried_profile, profiles_dict):
-    
-    closest = 10000
+def comparison(queried_profile, profiles):
 
-    for region in profiles_dict["profiles"]:
+    comparative_profiles = make_profile_comparative_json(profiles)
+    closest_profile = ''
+    lowest_score = 1000000
+    print(f'\nqueried profile is\n{queried_profile}')
+    list_of_dicts = []
+    for comparative_region in comparative_profiles:
         # Loop through regions, compare values of clicked location to region
-        # Whichever one has the lowest score is the closest region.
-        return
+        # Whichever one has the lowest score is the most similar
+        elev = abs(queried_profile["mean_elevation"] - comparative_region["mean_elevation"])
+        temp = abs(queried_profile["mean_temp"] - comparative_region["mean_temp"])
+        clay = abs(queried_profile["mean_soil_content_%"]["Clay"] - comparative_region["mean_soil_content_%"]["Clay"])
+        org = abs(queried_profile["mean_soil_content_%"]["Organic Matter"] - comparative_region["mean_soil_content_%"]["Organic Matter"])
+        other = abs(queried_profile["mean_soil_content_%"]["Other"] - comparative_region["mean_soil_content_%"]["Other"])
+        sand = abs(queried_profile["mean_soil_content_%"]["Sand"] - comparative_region["mean_soil_content_%"]["Sand"])
+        score = round(elev + temp + clay + org + other + sand, 2)
+        
+        if score < lowest_score:
+            lowest_score = score
+            closest_profile = comparative_region["region"]
+
+        comparative_dict = ({f'{comparative_region["region"]}': score})
+        list_of_dicts.append(comparative_dict)
+    print(f'closest profile is: {closest_profile}')
+    return closest_profile
+    
+
+        
 
 def make_queried_json(soil_df, elevation, lat, long):
     soil = pandas.DataFrame.to_dict(soil_df)
@@ -120,15 +141,38 @@ def make_queried_json(soil_df, elevation, lat, long):
             "mean_elevation": elevation,
             "mean_temp": get_location_temp(lat,long),
             "mean_soil_content_%" : {
-                "Clay": soil["Mean"]["Clay"],
-                "Organic Matter": soil["Mean"]["Organic Matter"],
-                "Other": soil["Mean"]["Other"],
-                "Sand": soil["Mean"]["Sand"]
+                "Clay": round((soil["Mean"]["Clay"] * 100),2),
+                "Organic Matter": round((soil["Mean"]["Organic Matter"] * 100),2),
+                "Other": round((soil["Mean"]["Other"] * 100),2),
+                "Sand": round((soil["Mean"]["Sand"] * 100), 2),
             },
             "avg_diurnal_range" : get_location_diurnal_range(long, lat),
         }
     
-    print(location_dict)
+    return location_dict
+
+def make_profile_comparative_json(profiles):
+    """
+    returns a list of dicts from the pre-made profiles containing only the data we want to compare to the queried location
+    """
+    
+    list_of_dicts = []
+    for region in profiles["profiles"]:
+        location_dict = {
+            "region" : region["properties"]["region"],
+            "mean_elevation": region["properties"]["mean_elevation"],
+            "mean_temp": region["properties"]["mean_temp"],
+            "mean_soil_content_%" : {
+                "Clay": region["properties"]["mean_soil_content_%"]["Clay"],
+                "Organic Matter": region["properties"]["mean_soil_content_%"]["Organic Matter"],
+                "Other": region["properties"]["mean_soil_content_%"]["Other"],
+                "Sand": region["properties"]["mean_soil_content_%"]["Sand"]
+            },
+            "avg_diurnal_range" : region["properties"]["avg_diurnal_range"],
+        }
+        list_of_dicts.append(location_dict)
+
+    return list_of_dicts
 
 def get_location_temp(lat,long):
     

@@ -146,7 +146,7 @@
                 "avg_diurnal_range": 12.23,
                 "country": "France",
                 "image": "https://i0.wp.com/thegoodlifefrance.com/wp-content/uploads/2019/11/burgundy-vineyard-tours.jpg?ssl=1",
-                "mean_elevation": "281.44 m",
+                "mean_elevation": 281.44,
                 "mean_soil_content_%": {
                     "Clay": 27.896,
                     "Organic Matter": 1.175,
@@ -313,7 +313,7 @@
                 "avg_diurnal_range": 11.71,
                 "country": "Italy",
                 "image": "https://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/34/2021/06/Valpolicella-920x609.jpg",
-                "mean_elevation": "260.78 m",
+                "mean_elevation": 260.78,
                 "mean_soil_content_%": {
                     "Clay": 30.197,
                     "Organic Matter": 1.519,
@@ -480,7 +480,7 @@
                 "avg_diurnal_range": 12.23,
                 "country": "USA",
                 "image": "https://i0.wp.com/thegoodlifefrance.com/wp-content/uploads/2019/11/burgundy-vineyard-tours.jpg?ssl=1",
-                "mean_elevation": "281.44 m",
+                "mean_elevation": 281.44,
                 "mean_soil_content_%": {
                     "Clay": 27.896,
                     "Organic Matter": 1.175,
@@ -753,7 +753,7 @@
                 "avg_diurnal_range": 13.29,
                 "country": "France",
                 "image": "https://a.cdn-hotels.com/gdcs/production189/d444/3b7213f7-32a8-4923-bf70-51714fb0945a.jpg?impolicy=fcrop&w=800&h=533&q=medium",
-                "mean_elevation": "42.72 m",
+                "mean_elevation": 42.72,
                 "mean_soil_content_%": {
                     "Clay": 21.859,
                     "Organic Matter": 0.996,
@@ -928,7 +928,7 @@
                 "avg_diurnal_range": 12.45,
                 "country": "Italy",
                 "image": "https://www.savoredjourneys.com/wp-content/uploads/2018/11/wineries-tuscany-first.jpg",
-                "mean_elevation": "316.54 m",
+                "mean_elevation": 316.54,
                 "mean_soil_content_%": {
                     "Clay": 33.184,
                     "Organic Matter": 1.421,
@@ -983,7 +983,7 @@
                 "avg_diurnal_range": 11.06,
                 "country": "France",
                 "image": "https://www.routedesvins.alsace/wp-content/uploads/2020/08/photoreseau.jpg",
-                "mean_elevation": "307.26 m",
+                "mean_elevation": 307.26,
                 "mean_soil_content_%": {
                     "Clay": 22.178,
                     "Organic Matter": 1.505,

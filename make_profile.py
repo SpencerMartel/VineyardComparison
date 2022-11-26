@@ -29,7 +29,6 @@ def get_mean_elevation(bounding_geometry):
     """
     Returns a mean elevation for queried region in String format
     Uses ee.reduceRegion to get stats
-    Returns String containing result in 
     """
     ee_geometry = ee.Geometry.Polygon(bounding_geometry)
     
@@ -42,7 +41,7 @@ def get_mean_elevation(bounding_geometry):
         maxPixels=1e9
     )
     
-    mean_elevation = (str(round(mean_dict.get('elevation').getInfo(),2)) + ' m')
+    mean_elevation = (round(mean_dict.get('elevation').getInfo(),2))
 
     return mean_elevation
 
