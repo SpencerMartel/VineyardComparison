@@ -78,38 +78,13 @@ def make_card_chart (region_dict):
 
     return df
 
-def comparative_soil_chart(location_soil, profile_soil):
-    
-    # Merge clicked location and closest profile dataframes
-    double = location_soil.join(profile_soil.T)
-
-    # Configure the chart
-    labels = double.T.columns
-    x = np.arange(len(labels))  # the label locations
-    width = 0.35  # the width of the bars
-    fig, ax = plt.subplots()
-    rects1 = ax.bar(x-width/2, double["Mean"] * 100 , width, label = "Clicked Location", color='r')
-    rects2 = ax.bar(x+width/2, double["Profile Mean"] * 100, width, label = "Most Similar Profile")
-    # Set Titles, other personalizations
-    ax.set_ylabel('Soil Content % ')
-    ax.set_title('Comparative soil distribution')
-    ax.set_xticks(x, labels)
-    ax.set_facecolor(color='#380024')
-    ax.legend()
-    ax.bar_label(rects1, padding=3)
-    ax.bar_label(rects2, padding=3)
-    mpl.rcParams.update({'text.color' : "white",
-                        'axes.labelcolor' : "white"})
-    return fig
-
-
 def comparison(queried_profile, profiles):
 
     comparative_profiles = make_profile_comparative_json(profiles)
     closest_profile = ''
     lowest_score = 1000000
-    print(f'\nqueried profile is\n{queried_profile}')
     list_of_dicts = []
+
     for comparative_region in comparative_profiles:
         # Loop through regions, compare values of clicked location to region
         # Whichever one has the lowest score is the most similar
@@ -120,15 +95,15 @@ def comparison(queried_profile, profiles):
         other = abs(queried_profile["mean_soil_content_%"]["Other"] - comparative_region["mean_soil_content_%"]["Other"])
         sand = abs(queried_profile["mean_soil_content_%"]["Sand"] - comparative_region["mean_soil_content_%"]["Sand"])
         score = round(elev + temp + clay + org + other + sand, 2)
+        
         if score < lowest_score:
             lowest_score = score
             closest_profile = comparative_region["region"]
 
-        comparative_dict = ({f'{comparative_region["region"]}': score})
+        comparative_dict = {"region": comparative_region["region"], "score": score}
         list_of_dicts.append(comparative_dict)
-    print(f'closest profile is: {closest_profile}')
-    print(f'List of regions and scores: {list_of_dicts}')
-    return closest_profile
+
+    return closest_profile, list_of_dicts
     
 
         

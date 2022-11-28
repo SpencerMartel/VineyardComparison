@@ -162,7 +162,7 @@
                 "source": "thegoodlifefrance.com",
                 "white_grapes": [
                     "Chardonnay",
-                    "Aligot\u00c3\u00a9"
+                    "Aligot\u00E9"
                 ]
             },
             "type": "Feature"
@@ -931,7 +931,7 @@
                 "white_grapes": [
                     "Riesling",
                     "Pinot Blanc",
-                    "Gew\u00c3\u00bcrztraminer",
+                    "Gew\u00FCrztraminer",
                     "Pinot Gris",
                     "Sylvaner"
                 ]
@@ -1580,7 +1580,7 @@
                 ],
                 "region": "Central Otago",
                 "source": "https://jackyblisson.com/",
-                "white_grapes": []
+                "white_grapes": ["Pinot Gris", "Chardonnay"]
             },
             "type": "Feature"
         },
@@ -1756,7 +1756,7 @@
                 ],
                 "region": "Paso Robles",
                 "source": "assets.simpleviewinc.com",
-                "white_grapes": []
+                "white_grapes": ["Viognier", "Chardonnay"]
             },
             "type": "Feature"
         },
@@ -1889,7 +1889,7 @@
                 "red_grapes": [
                     "Pinot Noir"
                 ],
-                "region": "Willamette Valley, Oregon",
+                "region": "Willamette Valley",
                 "source": "assets.simpleviewinc.com",
                 "white_grapes": [
                     "Pinot Gris",
