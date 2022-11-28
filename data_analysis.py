@@ -47,7 +47,6 @@ def get_elevation(lat,long):
     return dict
 
 def make_profile_card(region_dict):
-
     # Extract values
     region = region_dict['properties']['region']
     country = region_dict['properties']['country']
@@ -114,14 +113,13 @@ def comparison(queried_profile, profiles):
     for comparative_region in comparative_profiles:
         # Loop through regions, compare values of clicked location to region
         # Whichever one has the lowest score is the most similar
-        elev = abs(queried_profile["mean_elevation"] - comparative_region["mean_elevation"])
+        elev = abs(queried_profile["mean_elevation"] - comparative_region["mean_elevation"]) * 0.02
         temp = abs(queried_profile["mean_temp"] - comparative_region["mean_temp"])
         clay = abs(queried_profile["mean_soil_content_%"]["Clay"] - comparative_region["mean_soil_content_%"]["Clay"])
         org = abs(queried_profile["mean_soil_content_%"]["Organic Matter"] - comparative_region["mean_soil_content_%"]["Organic Matter"])
         other = abs(queried_profile["mean_soil_content_%"]["Other"] - comparative_region["mean_soil_content_%"]["Other"])
         sand = abs(queried_profile["mean_soil_content_%"]["Sand"] - comparative_region["mean_soil_content_%"]["Sand"])
         score = round(elev + temp + clay + org + other + sand, 2)
-        
         if score < lowest_score:
             lowest_score = score
             closest_profile = comparative_region["region"]
@@ -129,6 +127,7 @@ def comparison(queried_profile, profiles):
         comparative_dict = ({f'{comparative_region["region"]}': score})
         list_of_dicts.append(comparative_dict)
     print(f'closest profile is: {closest_profile}')
+    print(f'List of regions and scores: {list_of_dicts}')
     return closest_profile
     
 

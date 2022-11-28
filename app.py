@@ -13,7 +13,9 @@ def main():
         page_icon=":wine_glass:",
         layout = "wide",
         initial_sidebar_state="expanded")
-
+    with open('style.css') as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    
     st.markdown(
         """
         <style>
@@ -27,13 +29,29 @@ def main():
         unsafe_allow_html=True,
         )
     
+    @st.cache
+    def load_profiles():
+        p = open('profiles.json')
+        profiles = json.load(p)
+        return profiles 
+    @st.cache
+    def load_sand():
+        sand = get_data("sand")
+        return sand
+    @st.cache
+    def load_clay():
+        clay = get_data("clay")
+        return clay
+    @st.cache
+    def load_orgc():
+        orgc = get_data("orgc")
+        return orgc
 
+    profiles = load_profiles()
     # Sidebar
     with st.sidebar:
         # Load profiles as python dict.
-        p = open('profiles.json')
-        profiles = json.load(p)
-        
+
         st.header('Profiles currently in our database')
         st.subheader('Click through them to learn about the region')
 
@@ -41,6 +59,7 @@ def main():
         france_options = []
         usa_options = []
         italy_options = []
+        nz_options = []
         for obj in profiles['profiles']:
             if obj['properties']['country'] == 'France':
                 france_options.append(obj['properties']['region'])
@@ -48,12 +67,14 @@ def main():
                 italy_options.append(obj['properties']['region'])
             elif obj['properties']['country'] == 'USA':
                 usa_options.append(obj['properties']['region'])
+            elif obj['properties']['country'] == 'New Zealand':
+                nz_options.append(obj['properties']['region'])            
 
 
-        country = st.selectbox(label = 'Country', label_visibility='collapsed',options=('France', 'Italy', 'USA',))
+
+        country = st.selectbox(label = 'Country', label_visibility='collapsed',options=('France', 'Italy', 'USA','New Zealand'))
         if country == 'France':
             region = st.radio(label='Region', options=france_options)
-            
             # Grab the profile associated with the queried region to build the data card.
             queried_region_profile = {}
             for obj in profiles['profiles']:
@@ -77,14 +98,23 @@ def main():
             for obj in profiles['profiles']:
                 if obj['properties']['region'] == region:
                     queried_region_profile.update(obj)
+            
             make_profile_card(queried_region_profile)
+        
+        if country == 'New Zealand':
+            region = st.radio(label='Region', options=nz_options)
+            # Grab the profile associated with the queried region to build the card.
+            queried_region_profile = {}
+            for obj in profiles['profiles']:
+                if obj['properties']['region'] == region:
+                    queried_region_profile.update(obj)
+            make_profile_card(queried_region_profile)
+        
+        
 
     st.title('Site Suitability for Canadian Vineyards')
     st.write("Select any location in Canada to see which of the world's most famous wine regions it is most similar to!")
-    # Load soil data
-    sand = get_data("sand")
-    clay = get_data("clay")
-    orgc = get_data("orgc")
+
 
     # Display map
     my_map = map_creater(None)
@@ -103,9 +133,9 @@ def main():
 
 
         # Data analysis
-        queried_clay_profile = local_profile(clay, (clicked_lng,clicked_lat), 1000)
-        queried_sand_profile = local_profile(sand, (clicked_lng,clicked_lat), 1000)
-        queried_orgc_profile = local_profile(orgc, (clicked_lng,clicked_lat), 1000)
+        queried_clay_profile = local_profile(load_clay(), (clicked_lng,clicked_lat), 1000)
+        queried_sand_profile = local_profile(load_sand(), (clicked_lng,clicked_lat), 1000)
+        queried_orgc_profile = local_profile(load_orgc(), (clicked_lng,clicked_lat), 1000)
         
         if queried_clay_profile is None:
             st.write('No data available')
