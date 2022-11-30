@@ -122,20 +122,21 @@ def main():
         st.title('How the app works')
         st.write("""
         The concept for this app was to compare Canadian terroir to that of the famous wine regions of the world.
-        \nIn my research for this project I had seen similar research projects be implemented state wide but nothing in Canada and nothing at this scale.
-        \n""")
+        \nThere have been attempts at an app like this as a [research project](https://www.cgit.vt.edu/research/archive/vineyard-site-evaluation.html) but none in Canada and none at this scale.
+        \nThis app was written in python using some HTML and CSS injections for customizing the frontend.
+        """)
         st.write('')
-        st.subheader('Workflow')
+        st.subheader('The Workflow')
         st.write("""
-        1.\tCreate the profiles of the major wine regions using Google Earth Engine
-        \n2.\tCreate the profile for the queried location
-        \n3.\tCompare the queried location profile to all famous location profiles to find the most similar.
-        \n4.\tPass the results back to frontend for display\n\n
+        1.\tCreate the profiles of the major wine regions using Google Earth Engine.
+        \n2.\tCreate the profile for the queried location.
+        \n3.\tCompare the queried location profile to all famous location profiles to find the most similar one.
+        \n4.\tPass the results back to frontend for display.\n\n
         """)
         st.write('')
         st.write('')
+
         st.write("Here is the template I used when creating new location profiles following GeoJSON format:")
-        
         with st.expander("GeoJSON Profile Template"):
             st.code("""
 {
@@ -159,8 +160,9 @@ def main():
 }""", language='json')
 
         st.write('')
-        st.write("""Getting the data for the profiles mainly consisted of opening the file where I have stored the templates with their bounding geometries, clipping Google Earth Engine images to that area, grabbing the mean data values of the clipped image, and writing that data to the correct location.
-        Here's the script I used to programatically fill the elevation, temperature, soil content, and diurnal range values.""")
+        st.write("""Getting the data for the profiles consisted of opening the file where I have stored the templates with their bounding geometries, clipping Google Earth Engine images to that area, grabbing the mean data values of the clipped image, and writing that data to the correct location.
+        I would have to manually input some fields but
+        here is the script I used to programatically fill the elevation, temperature, soil content, and diurnal range values.""")
         
         with st.expander("Earth Engine Automation"):
             st.code("""
@@ -193,7 +195,7 @@ def main():
 
 def get_mean_elevation(bounding_geometry):
     "
-    Returns a mean elevation for queried region in String format
+    Returns a mean elevation for queried region as int.
     Uses ee.reduceRegion to get stats
     "
     ee_geometry = ee.Geometry.Polygon(bounding_geometry)
@@ -201,10 +203,10 @@ def get_mean_elevation(bounding_geometry):
 
     image = ee.Image('NASA/NASADEM_HGT/001').clip(ee_geometry).select('elevation')
     mean_dict = image.reduceRegion(
-    reducer=ee.Reducer.mean(),
-    geometry=ee_geometry,
-    scale=30,
-    maxPixels=1e9
+        reducer=ee.Reducer.mean(),
+        geometry=ee_geometry,
+        scale=30,
+        maxPixels=1e9
     )
 
     mean_elevation = (round(mean_dict.get('elevation').getInfo(),2))
@@ -238,7 +240,8 @@ def profile_mean_soil_content(queried_polygon):
     profile = { "Sand": sand,
                 "Clay" : clay,
                 "Organic Matter" : orgc,
-                "Other": round(100 - (sand + clay + orgc))}
+                "Other": round(100 - (sand + clay + orgc), 2)
+                }
     return profile
 
 
@@ -270,7 +273,7 @@ def get_mean_temp(bounding_geometry):
         geometry=ee_geometry,
         scale=30,
         maxPixels=1e9
-        )
+    )
     value = list(mean_dict.getInfo().values())
     return round((value[0]*0.1), 2)
 
@@ -312,7 +315,9 @@ def comparison(queried_profile, profiles):
     return closest_profile""", 'python')
         st.write('')
         
-        st.write('That\'s how it all works. Using streamlit for the frontend let me focus on the geographic aspects of this project while being able to dip my toe in database management.\nFeel free to [contact me](https://www.linkedin.com/in/spencer-martel-576367239/) if you have any questions or would like a deeper explanation.')
+        st.write("""That\'s how it all works. Using streamlit for the frontend let me focus on the geographic aspects of this project while being able to dip my toe in database management.
+        \nFeel free to [contact me](https://www.linkedin.com/in/spencer-martel-576367239/) if you have any questions or would like a deeper explanation.
+        \nHere is the [GitHub repo](https://github.com/SpencerMartel/VineyardComparison) for this project.""")
     with tab1:
         # Display map
         my_map = map_creater(None)

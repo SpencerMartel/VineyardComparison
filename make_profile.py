@@ -27,7 +27,7 @@ def main():
 
 def get_mean_elevation(bounding_geometry):
     """
-    Returns a mean elevation for queried region in String format
+    Returns a mean elevation for queried region as int.
     Uses ee.reduceRegion to get stats
     """
     ee_geometry = ee.Geometry.Polygon(bounding_geometry)
@@ -72,7 +72,7 @@ def profile_mean_soil_content(queried_polygon):
     profile = { "Sand": sand,
                 "Clay" : clay,
                 "Organic Matter" : orgc,
-                "Other": round(100 - (sand + clay + orgc))}
+                "Other": round(100 - (sand + clay + orgc), 2)}
     return profile
 
 def create_soil_data(soil_dict):
