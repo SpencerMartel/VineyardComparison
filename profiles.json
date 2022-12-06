@@ -150,7 +150,7 @@
                 "mean_soil_content_%": {
                     "Clay": 27.896,
                     "Organic Matter": 1.175,
-                    "Other": 40,
+                    "Other": 40.26,
                     "Sand": 30.671
                 },
                 "mean_temp": 10.5,
@@ -162,7 +162,7 @@
                 "source": "thegoodlifefrance.com",
                 "white_grapes": [
                     "Chardonnay",
-                    "Aligot\u00E9"
+                    "Aligot\u00e9"
                 ]
             },
             "type": "Feature"
@@ -317,7 +317,7 @@
                 "mean_soil_content_%": {
                     "Clay": 30.197,
                     "Organic Matter": 1.519,
-                    "Other": 36,
+                    "Other": 35.58,
                     "Sand": 32.703
                 },
                 "mean_temp": 12.12,
@@ -416,7 +416,7 @@
                 "mean_soil_content_%": {
                     "Clay": 27.225,
                     "Organic Matter": 1.025,
-                    "Other": 33,
+                    "Other": 33.09,
                     "Sand": 38.658
                 },
                 "mean_temp": 14.71,
@@ -689,7 +689,7 @@
                 "mean_soil_content_%": {
                     "Clay": 21.859,
                     "Organic Matter": 0.996,
-                    "Other": 28,
+                    "Other": 27.65,
                     "Sand": 49.495
                 },
                 "mean_temp": 12.57,
@@ -864,7 +864,7 @@
                 "mean_soil_content_%": {
                     "Clay": 33.184,
                     "Organic Matter": 1.421,
-                    "Other": 35,
+                    "Other": 35.44,
                     "Sand": 29.96
                 },
                 "mean_temp": 13.28,
@@ -919,7 +919,7 @@
                 "mean_soil_content_%": {
                     "Clay": 22.178,
                     "Organic Matter": 1.505,
-                    "Other": 37,
+                    "Other": 36.64,
                     "Sand": 39.675
                 },
                 "mean_temp": 9.52,
@@ -931,7 +931,7 @@
                 "white_grapes": [
                     "Riesling",
                     "Pinot Blanc",
-                    "Gew\u00FCrztraminer",
+                    "Gew\u00fcrztraminer",
                     "Pinot Gris",
                     "Sylvaner"
                 ]
@@ -1000,7 +1000,7 @@
                 "mean_soil_content_%": {
                     "Clay": 24.397,
                     "Organic Matter": 3.22,
-                    "Other": 22,
+                    "Other": 21.58,
                     "Sand": 50.801
                 },
                 "mean_temp": 9.3,
@@ -1355,7 +1355,7 @@
                 "mean_soil_content_%": {
                     "Clay": 29.445,
                     "Organic Matter": 2.829,
-                    "Other": 23,
+                    "Other": 23.22,
                     "Sand": 44.51
                 },
                 "mean_temp": 11.82,
@@ -1571,7 +1571,7 @@
                 "mean_soil_content_%": {
                     "Clay": 21.896,
                     "Organic Matter": 3.781,
-                    "Other": 22,
+                    "Other": 22.33,
                     "Sand": 51.993
                 },
                 "mean_temp": 7.17,
@@ -1580,7 +1580,10 @@
                 ],
                 "region": "Central Otago",
                 "source": "https://jackyblisson.com/",
-                "white_grapes": ["Pinot Gris", "Chardonnay"]
+                "white_grapes": [
+                    "Pinot Gris",
+                    "Chardonnay"
+                ]
             },
             "type": "Feature"
         },
@@ -1746,7 +1749,7 @@
                 "mean_soil_content_%": {
                     "Clay": 26.412,
                     "Organic Matter": 0.65,
-                    "Other": 30,
+                    "Other": 30.26,
                     "Sand": 42.675
                 },
                 "mean_temp": 14.54,
@@ -1756,7 +1759,10 @@
                 ],
                 "region": "Paso Robles",
                 "source": "assets.simpleviewinc.com",
-                "white_grapes": ["Viognier", "Chardonnay"]
+                "white_grapes": [
+                    "Viognier",
+                    "Chardonnay"
+                ]
             },
             "type": "Feature"
         },
@@ -1882,7 +1888,7 @@
                 "mean_soil_content_%": {
                     "Clay": 27.139,
                     "Organic Matter": 1.242,
-                    "Other": 42,
+                    "Other": 41.55,
                     "Sand": 30.074
                 },
                 "mean_temp": 11.08,
@@ -1900,23 +1906,150 @@
             "type": "Feature"
         },
         {
-            "type": "Feature",
             "geometry": {
-              "type": "",
-              "coordinates": [[18.2961172416,39.9135220202],[18.1148428275,39.9409032048],[18.0791372611,40.0503184002],[17.9994863822,40.1532607085],[17.8429312064,40.3189007884],[17.6067251517,40.3356518698],[17.458409722,40.4256176928],[17.3512930228,40.5196392839],[17.0381826713,40.6677166501],[16.0906118705,40.9877706957],[15.7472891166,41.1885697889],[15.4588980033,41.3104050791],[15.258397515,41.4999320092],[15.343541558,41.7155641107],[15.4753774955,41.7872812814],[15.7060903861,41.7073627611],[15.8544058158,41.438190494],[15.9807485892,41.2794515447],[16.8733877494,40.933844],[17.3155874564,40.73642968],[17.6479238822,40.7697195694],[17.8346914603,40.6947938813],[17.9994863822,40.6218685885],[18.0104727103,40.5655574738],[18.073644097,40.5238149655],[18.1972402884,40.4527930075],[18.3647817924,40.3356518698],[18.3071035697,40.0145673354],[18.2961172416,39.9135220202]]
+                "coordinates": [
+                    [
+                        18.2961172416,
+                        39.9135220202
+                    ],
+                    [
+                        18.1148428275,
+                        39.9409032048
+                    ],
+                    [
+                        18.0791372611,
+                        40.0503184002
+                    ],
+                    [
+                        17.9994863822,
+                        40.1532607085
+                    ],
+                    [
+                        17.8429312064,
+                        40.3189007884
+                    ],
+                    [
+                        17.6067251517,
+                        40.3356518698
+                    ],
+                    [
+                        17.458409722,
+                        40.4256176928
+                    ],
+                    [
+                        17.3512930228,
+                        40.5196392839
+                    ],
+                    [
+                        17.0381826713,
+                        40.6677166501
+                    ],
+                    [
+                        16.0906118705,
+                        40.9877706957
+                    ],
+                    [
+                        15.7472891166,
+                        41.1885697889
+                    ],
+                    [
+                        15.4588980033,
+                        41.3104050791
+                    ],
+                    [
+                        15.258397515,
+                        41.4999320092
+                    ],
+                    [
+                        15.343541558,
+                        41.7155641107
+                    ],
+                    [
+                        15.4753774955,
+                        41.7872812814
+                    ],
+                    [
+                        15.7060903861,
+                        41.7073627611
+                    ],
+                    [
+                        15.8544058158,
+                        41.438190494
+                    ],
+                    [
+                        15.9807485892,
+                        41.2794515447
+                    ],
+                    [
+                        16.8733877494,
+                        40.933844
+                    ],
+                    [
+                        17.3155874564,
+                        40.73642968
+                    ],
+                    [
+                        17.6479238822,
+                        40.7697195694
+                    ],
+                    [
+                        17.8346914603,
+                        40.6947938813
+                    ],
+                    [
+                        17.9994863822,
+                        40.6218685885
+                    ],
+                    [
+                        18.0104727103,
+                        40.5655574738
+                    ],
+                    [
+                        18.073644097,
+                        40.5238149655
+                    ],
+                    [
+                        18.1972402884,
+                        40.4527930075
+                    ],
+                    [
+                        18.3647817924,
+                        40.3356518698
+                    ],
+                    [
+                        18.3071035697,
+                        40.0145673354
+                    ],
+                    [
+                        18.2961172416,
+                        39.9135220202
+                    ]
+                ],
+                "type": ""
             },
             "properties": {
-              "country" : "Italy",
-              "region": "Puglia",
-              "red_grapes": ["Primitivo","Bombino Nero"],
-              "white_grapes": ["Verdeca"],
-              "mean_elevation": "",
-              "mean_temp": "",
-              "mean_soil_content_%" : {},
-              "avg_diurnal_range" : 0,
-              "image": "https://www.winetraveler.com/wp-content/uploads/2017/08/Gravina-Puglia-Wine-Region.jpg",
-              "source": "winetraveler.com"
-            }
-          }
+                "avg_diurnal_range": 18.14,
+                "country": "Italy",
+                "image": "https://www.winetraveler.com/wp-content/uploads/2017/08/Gravina-Puglia-Wine-Region.jpg",
+                "mean_elevation": 184.43,
+                "mean_soil_content_%": {
+                    "Clay": 32.797,
+                    "Organic Matter": 0.847,
+                    "Other": 34.83,
+                    "Sand": 31.526
+                },
+                "mean_temp": 15.29,
+                "red_grapes": [
+                    "Primitivo",
+                    "Bombino Nero"
+                ],
+                "region": "Puglia",
+                "source": "winetraveler.com",
+                "white_grapes": [
+                    "Verdeca"
+                ]
+            },
+            "type": "Feature"
+        }
     ]
 }
