@@ -2,7 +2,8 @@ import ee
 import streamlit as st
 
 service_account = st.secrets["ee_email"]
-credentials = ee.ServiceAccountCredentials(email = service_account, key_data = st.secrets["ee_key"])
+service_key = st.secrets["ee_key"]
+credentials = ee.ServiceAccountCredentials(email = service_account, key_data = service_key)
 ee.Initialize(credentials)
 
 
