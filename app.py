@@ -383,7 +383,7 @@ def comparison(queried_profile, profiles):
                 st.subheader('No data for that location, make sure to click in Canada and not on a body of water.')
 
 def map_creater(marker_location):
-    my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]], tiles= "Stamen Terrain")
+    my_map = folium.Map(location=(57.70414723434193, -108.28125000000001), zoom_start = 3, max_bounds=[[-180, -90], [180, 90]], tiles= "openstreetmap")
     if marker_location != None:
         folium.Marker(marker_location).add_to(my_map)
     return my_map
